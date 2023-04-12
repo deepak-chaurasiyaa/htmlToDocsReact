@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { asBlob } from 'html-docx-js-typescript';
+import { saveAs } from 'file-saver';
 
-function App() {
+const MyComponent = () => {
+  const kk = `<!DOCTYPE html>
+    <html>
+      <head>
+        <title>Hello, World!</title>
+      </head>
+      <body>
+        <h1 style="color:red; font-size: 15px;">commencement Date: ${new Date()}</h1>
+        <h1 style="color:blue; font-size: 15px;">commencement Heading: Deepak Chaurasiya</h1>
+        <h1 style="color:blue; font-size: 15px;">copies To: Learning</h1>
+    </div>
+      </body>
+    </html>`;
+
+  const saveDocx = async () => {
+    console.log('hell');
+    const data = await asBlob(kk);
+    saveAs(data, 'file.docx');
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button id="genDocx" onClick={saveDocx}>
+        Click to Download
+      </button>
     </div>
   );
-}
+};
 
-export default App;
+export default MyComponent;
